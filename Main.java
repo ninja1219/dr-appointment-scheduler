@@ -12,18 +12,23 @@ public class Main {
         String scheduleJson = API.getSchedule(token);
         Schedule schedule = new Schedule(scheduleJson);
         
-        updateSchedule(token, schedule);
+        // updateSchedule(token, schedule);
 
         boolean stopped = API.postStop(token);
         if (!stopped) {
             System.out.println("Error stopping");
             return;
         }
+
+        System.out.println(schedule.toString());
     }
 
     private static void updateSchedule(String token, Schedule schedule) {
         String apptRequest = API.getAppointmentRequest(token);
-        while (apptRequest != "STOP") {
+        while (!apptRequest.equals("STOP")) {
+
+            // TODO
+
             // Parse request
             String data = schedule.addAppt(apptRequest);
 
